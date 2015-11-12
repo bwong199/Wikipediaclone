@@ -1,0 +1,41 @@
+<a href="/events">Events Dashboard</a> 
+
+<a href="/log_out">Log Out</a> 
+
+<h1> <%= @event.name %> </h1> 
+
+<p> <%= @event.host %> </p> 
+
+<p> <%= (@event.date).to_date %> </p> 
+
+<p> <%= @event.location %> </p> 
+
+<p> <%= @event.description %> </p> 
+
+<p> <%= @joins.count %> people are joining the event </p> 
+
+
+
+
+<h1> Discussions about the event </h1> 
+
+<% @comments.each do |u| %>
+
+  <p> <%= u.commentor %>  says <%= u.comment %> </p> 
+
+
+<% end %> 
+
+    <form action="/comments" method="post">
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="hidden" name="event_id" value='<%= @event.id %>'>
+      <input type="hidden" name="comment[commentor]" value='<%= current_user.first_name %> '>
+
+      <p>
+        <label for="comment">Comment</label>
+        <input type="text" id="Comment" name="comment[comment]">
+      </p
+
+      <br> 
+      <input type="submit" value='Add Comment'>
+    </form>

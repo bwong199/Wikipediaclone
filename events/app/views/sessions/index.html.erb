@@ -1,0 +1,79 @@
+<h1> Welcome </h1> 
+<br>
+<br> 
+
+
+
+
+<% if flash[:success] %>
+  <%= flash[:success] %>
+
+<% end %>
+
+<% if flash[:error] %>
+  <%= flash[:error] %>
+
+<% end %>
+
+<h1>Register</h1>
+    <form action="/users" method="post">
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <p>
+        <label for="first_name">First Name</label>
+        <input type="text" id="First Name" name="user[first_name]">
+      </p>
+
+      <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="Last Name" name="user[last_name]">
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="text" id="Email" name="user[email]">
+      </p>
+
+      <p>
+        <label for="location">Location</label>
+        <input type="text" id="Location" name="user[location]">
+      </p>
+
+       <p>
+        <label for="password">Password</label>
+        <input type="text" id="Password" name="user[password]">
+
+      </p>
+
+      <p>
+        Password should be at least 8 characters
+        <br>
+        <label for="password_confirmation">Password Confirmation </label>
+        <input type="text" id="Password Confirmation" name="user[password_confirmation]">
+
+      </p>
+
+      <input type="submit" value='Register'>
+    </form>
+
+<br> 
+<br> 
+
+<% if flash[:errors] %>
+  <%= flash[:errors] %>
+
+<% end %>
+
+<h1>Login</h1>
+    <form action="/log_in" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <p>
+        <label for="email">Email:</label>
+        <input type="text" id="Email" name="email" >
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="text" id="Password" name="password" >
+      </p>
+      <input type="submit" value="Log In">
+      
+    </form>

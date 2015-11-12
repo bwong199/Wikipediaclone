@@ -1,0 +1,96 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$dark: #424652;
+$light: #9a9da4;
+$highlight: #8bc6db; 
+$border: #E9E9E9; 
+$white: #FFFFFF;
+
+#post_show_content {
+	text-align: center;
+	.date {
+		font-size: 0.9em;
+		color: $light;
+		margin: 0; 
+	}
+	h1 {
+		margin: 0;
+	}
+	hr {
+		margin: 2em auto;
+	}
+}
+
+
+#posts_wrapper {
+	padding: 3em 0;
+	.post {
+		text-align: center; 
+		.date {
+			font-size: 0.9em;
+			margin: 0; 
+		}
+		h2 {
+			margin: 0;
+			text-align: center;
+			font-size: 2em;
+			text-transform: uppercase; 
+			a {
+				text-decoratio: none;
+				color: $dark;
+				&:hover {
+					color: $highlight;
+				}
+			}
+		}
+		hr {
+			margin: 3em auto;
+		}
+	}
+}
+
+// - - - - - Pagination
+
+.pagination:before,
+.pagination:after {
+	content: " ";
+	display: table;
+}
+
+.pagination:after {
+	clear: box;
+}
+
+.pagination {
+	text-align: center; 
+	margin: 0 0 3em 0;
+	a, .previous_page, .current, .next_page {
+		padding: 0.75em 1em;
+		margin: 0 0.5em;
+		border-radius: .15em;
+		line-height: 20px;
+		text-decoration: $white;
+		font-weight: 700;
+		font-size: 0.7em;
+		font-style: normal; 
+		color: $dark; 
+		&:hover {
+			background: $highlight;
+			color: $white;
+		}
+	}
+	.current {
+		background: $highlight;
+		color: $white;
+	}
+
+	.disabled {
+		color: #C0C0C0;
+		&:hover {
+			color: #C0C0C0;
+			background: $white;
+		}
+	}
+}

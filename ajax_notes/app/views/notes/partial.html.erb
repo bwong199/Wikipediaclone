@@ -1,0 +1,15 @@
+<% @notes.reverse.each do |u| %> 
+	<h1><%= u.title %> </h1>
+
+      <form class="updateForm" action="/notes/<%= u.id %> " method="post">
+            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+              <input type="hidden" name="_method" value="patch">
+              <textarea rows="2" cols="50" id="description" placeholder="add description..." name="description"><%= u.description %>  </textarea> 
+      </form>
+
+     <form class="deleteForm" action="/notes/<%= u.id %>" method="post">
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value='Delete Note'>
+    </form>
+ <% end %> 

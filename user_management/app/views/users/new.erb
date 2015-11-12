@@ -1,0 +1,30 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+
+<% end %> 
+
+<h1>New User</h1>
+    <form action="/users" method="post">
+     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <p>
+        <label for="first_name">First Name</label>
+        <input type="text" id="First Name" name="first_name">
+      </p>
+
+       <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="Last Name" name="last_name">
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="text" id="Email" name="email">
+      </p>
+
+       <p>
+        <label for="password">Password</label>
+        <input type="text" id="Password" name="password">
+      </p>
+
+      <input type="submit" value='Create'>
+    </form>

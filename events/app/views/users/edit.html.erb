@@ -1,0 +1,35 @@
+<a href="/events">Events Dashboard</a> 
+
+<a href="/log_out">Log Out</a> 
+
+<h1>Edit Your Profile</h1>
+
+
+
+
+
+    <form action="/users/<%= @user.id %> " method="post">
+      <input type="hidden" name="_method" value="patch">
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <p>
+        <label for="first_name">First Name</label>
+        <input type="text" id="First Name" name="user[first_name]" value="<%= @user.first_name %> ">
+      </p>
+
+      <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="Last Name" name="user[last_name]" value="<%= @user.last_name %> ">
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="text" id="Email" name="user[email]" value="<%= @user.email %> ">
+      </p>
+
+      <p>
+        <label for="location">Location</label>
+        <input type="text" id="Location" name="user[location]" value="<%= @user.location %> ">
+      </p>
+
+      <input type="submit" value='Update Records'>
+    </form>

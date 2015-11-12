@@ -1,0 +1,14 @@
+<h1> Share your Mood </h1> 
+
+
+<h2> Please enter your emoji code here: </h2>  
+
+
+<form id='form' action="/main/get_api" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <label>Mood: 
+    <input type="text" name="mood" />
+  </label>
+<br>
+  <input type="submit" value="Check Code" />
+</form>

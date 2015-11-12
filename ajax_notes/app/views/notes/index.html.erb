@@ -1,0 +1,108 @@
+  <html>
+  <head>
+    <title> Ajax Posts </title>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <style type="text/css">
+    .posts{
+      border-style:solid;
+      border-color:black;
+      width: 200px;
+      margin: 5px;
+      display:inline-block;
+    }
+    </style>
+  </head>
+  <body>
+    <div id = "notes">
+      <% @notes.reverse.each do |u| %>
+      <div class="note">
+        <h1><%= u.title %> </h1>
+
+          <form class="updateForm" action="/notes/<%= u.id %> " method="post">
+            <input type="hidden" name="_method" value="patch">
+            <textarea rows="2" cols="50" id="description" placeholder="add description..." name="description"><%= u.description %>  </textarea>
+            <br />
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value='Delete Note' class="deleteButton" data-id="<%= u.id %>">
+          </form>
+        </div>
+        <% end %>
+      </div>
+
+      <form id="addForm" action="/notes" method="post">
+             <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+              <input type="text" name="title" placeholder="Insert title...">
+              <input type="submit" value= 'Add Note'>
+      </form>
+
+  <script>
+      var token = "<%= form_authenticity_token %>";
+    $(document).ready(function(){
+        // $.get("/ajax", function(res) {
+        //   $("#posts").html(res);
+        // }, "json");
+        var deleteNote = function(id,note){
+            $.ajax({
+              method: "post",
+              url : '/notes/' + id,
+              data: {
+                "_method" : "delete"
+              },
+              success: function(response){
+                note.remove();
+              }
+            })
+        }
+
+        var updateNote = function(id,description){
+            $.ajax({
+              method: "post",
+              url : '/notes/' + id,
+              data: {
+                "description" : description,
+                "_method" : "put"
+              }
+            })
+        }
+
+        $(document).on('submit', '#addForm', function(){
+            $.post($(this).attr('action'), $(this).serialize(),function(res){
+
+              var note = $('<div class="note"><h1></h1>' +
+                '<form class="updateForm" action="" method="post">' +
+                  '<input type="hidden" name="_method" value="patch">' +
+                  '<textarea rows="2" cols="50" id="description" placeholder="add description..." name="description"></textarea>' +
+                  '<br/><input type="hidden" name="_method" value="delete">' +
+                  '<input type="submit" class="deleteButton" value="Delete Note">' +
+                '</form>' +
+              '</div>');
+
+               note.find('h1').html(res.title);
+               note.find('.deleteButton').attr('data-id', res.id);
+
+              $('#notes').append(note);
+          })
+
+          return false;
+        });
+
+        $(document).on('click','input.deleteButton',function(event){
+            event.preventDefault();
+
+            var button = $(event.currentTarget);
+            deleteNote(button.attr('data-id'),button.closest('div.note'));
+        })
+
+        $(document).on('change','.updateForm textarea',function(event){
+            var value = $(event.currentTarget).val();
+            var id = $(event.currentTarget).closest('div.note').find('.deleteButton').attr('data-id');
+            updateNote(id,value);
+        })
+  })
+
+
+
+       </script>
+  </body>
+
+  </html>

@@ -1,0 +1,57 @@
+ 
+
+  <p><%= @user.name %> </p> 
+  <p><%= @user.email %> </p> 
+
+
+
+ <a href="/users/<%= @user.id %>/edit">Edit Profile</a> 
+
+
+
+<br> 
+<br> 
+
+
+     <form action="/users/<%= @user.id %>" method="post">
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="hidden" name="_method" value="delete">
+      <input type='hidden' name='user_id' value='<%= @user.id %>'>
+      <input type="submit" value='Delete Account'>
+    </form>   
+
+
+
+<h1>New User</h1>
+    <form action="/secrets" method="post">
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <p>
+        <label for="content">New Secret</label>
+        <input type="text" id="New Secret" name="content">
+        <input type='hidden' name='user_id' value='<%= @user.id %>'>
+
+      </p>
+
+      <input type="submit" value= 'Create Secret'>
+    </form>
+
+ <% @userSecret.each do |u| %> 
+	<p><%= u.content %> </p>
+	<p><%= u.likes.count %> likes</p>
+
+
+<%= current_user.id %> 
+<%= u.user_id %> 
+
+
+
+    <form action='/secrets/<%= u.id %> ' method='post'>
+  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  <input type='hidden' name='_method' value='delete'>
+  <input type='hidden' name='user_id' value='<%= @user.id %>'>
+  <input type='hidden' name='secret_id' value='<%= u.id %>'>
+  <input type='submit' value="Delete">
+</form>
+
+
+<% end %>

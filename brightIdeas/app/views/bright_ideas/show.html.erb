@@ -1,0 +1,26 @@
+  <a href="/bright_ideas"> Bright Ideas <a/> 
+
+ <form action="/log_out" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="submit" value="Log Out">
+    </form>
+
+<p> <%= @bright_idea.idea_author %> says <%= @bright_idea.post%> </p>
+
+<br>
+<br>  
+
+
+
+<p> People who likes this post: <p> 
+
+<% @bright_idea_likes.each do |u|  %> 
+
+ <p> <%= u.user_id %> </p> 
+
+<% end %> 
+
+
+
+
+

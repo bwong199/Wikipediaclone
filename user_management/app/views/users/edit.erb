@@ -1,0 +1,30 @@
+<h1>New User</h1>
+    <form action="/users/<%= @user.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <p>
+        <label for="first_name">First Name</label>
+        <input type="text" id="First Name" name="user[first_name]" value="<%= @user.first_name %>">
+
+      </p>
+
+       <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="Last Name" name="user[last_name]" value="<%= @user.last_name %>">
+
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="text" id="Email" name="user[email]" value="<%= @user.email %>" >
+
+      </p>
+
+       <p>
+        <label for="password">Password</label>
+        <input type="text" id="Password" name="user[password]" value="<%= @user.password %>">
+
+      </p>
+
+      <input type="submit" value= 'Update'>
+    </form>

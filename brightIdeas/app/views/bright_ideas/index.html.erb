@@ -1,0 +1,55 @@
+ <a href="/bright_ideas"> Bright Ideas <a/> 
+
+ <form action="/log_out" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="submit" value="Log Out">
+    </form>
+<h1> Hi <%= @user.name %> !</h1>  
+
+<form action="/bright_ideas" method="post">
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+    <input type="hidden" id="user_id" name="user_id" value="<%= @user.id %> " >
+    <input type="hidden" id="idea_author" name="bright_idea[idea_author]" value="<%= @user.alias %> " >
+    <input type="text" id="post" name="bright_idea[post]" placeholder="Post something witty here...">
+       
+
+      <input type="submit" value='Idea!'>
+</form>
+
+
+<% @posts.each do |u| %>
+
+
+	<p> <a href="/users/<%= u.user_id %> "> <%= u.idea_author %> </a> says  <%= u.post %> 
+
+	<% if current_user.id == u.user_id %> 
+
+		<form action="/bright_ideas/<%= u.id %>" method="post">
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'> <input type='hidden' name='_method' value='delete'><input type="submit" value='Delete Idea'>
+	    </form> 
+
+<% end %> 
+
+
+
+	</p> 
+
+
+	<p>  <a href="/bright_ideas/<%= u.id %> "> <%= u.likes.count %></a> people like this </p>
+	<br> 
+<% if  @likes.where(bright_idea_id: u.id).where(user_id: @user.id).blank? %> 
+
+ 	<form action='/likes' method='post'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='post_id' value='<%= u.id %>'>
+    <input type='hidden' name='user_id' value='<%= session[:user_id] %>'>
+    <input type='submit' value="Like">
+  </form>
+
+<% end %> 
+
+
+
+<% end %> 
+

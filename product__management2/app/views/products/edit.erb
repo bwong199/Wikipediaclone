@@ -1,0 +1,36 @@
+<h1>New Product</h1>
+
+
+    <form action="/products/<%= @product.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <p>
+        <label for="category">Category</label>
+        <select name="category">
+
+          <% @categories.each do |u| %>
+  <option value=<%= u.id %> ><%= u.name %> </option>
+        <% end %> 
+  
+      </select>
+      </p>
+
+
+      <p>
+        <label for="name">Name</label>
+        <input type="text" id="Name" name="products[name]" value="<%= @product.name %>">
+
+
+       <p>
+        <label for="pricing">Pricing</label>
+        <input type="text" id="Pricing" name="products[pricing]" value=<%= number_with_precision(@product.pricing, :precision => 2) %> >
+
+      </p>
+
+       <p>
+        <label for="description">Description</label>
+        <input type="text" id="Description" name="products[description]" value="<%= @product.description %>">
+      </p>
+
+      <input type="submit" value= 'Update'>
+    </form>

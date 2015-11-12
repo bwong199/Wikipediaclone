@@ -1,0 +1,30 @@
+<h1>All Products</h1>
+
+<a href="/products/new">New Product </a> 
+
+<% @products.each do |u| %>
+  <p><%= u.name %> </p> 
+  <p><%= u.description %> </p> 
+  <p><%= number_to_currency(u.pricing) %> </p> 
+
+
+ <form action="/products/<%= u.id %>" method="get">
+
+      <input type="submit" value="Show">
+    </form>
+
+
+ <form action="/products/<%= u.id %>/edit" method="get">
+
+      <input type="submit" value="Edit">
+    </form>
+
+    <form action="/products/<%= u.id %>" method="post">
+         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Destroy">
+    </form>   
+
+
+
+<% end %>

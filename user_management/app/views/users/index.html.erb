@@ -1,0 +1,30 @@
+<h1>All Users</h1>
+
+<a href="/users/new">New User</a>
+<% @users.each do |u| %>
+  <p><%= u.first_name %> </p> 
+   <p><%= u.last_name %> </p> 
+  <p><%= u.id %> </p> 
+
+
+ <form action="/users/<%= u.id %>" method="get">
+
+      <input type="submit" value="Show">
+    </form>
+
+ <form action="/users/<%= u.id %>/edit" method="get">
+
+      <input type="submit" value="Edit">
+    </form>
+
+    <form action="/users/<%= u.id %>" method="post">
+               <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="hidden" value="delete" name="_method">
+      <input type="submit" value="Destroy">
+    </form>    
+
+
+
+<% end %>
+
+
