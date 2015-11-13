@@ -1,10 +1,10 @@
 <% @articles.each do |article| %>
 
 <h2><a href="/articles/<%= article.id %>"><%= article.title %></a></h2>
+<em><%= article.category.name %></em>
 <p>Published at <%= article.created_at.strftime('%b %d %Y') %></p>
 <p><%= truncate(article.content, length: 200) %></p>
-<p><%= article.user.email %></p>
-<p><%= article.category.name %></p>
+<p>Submitted by  <%= article.user.email %></p>
 <% end %>
 
 <% if user_signed_in? %>

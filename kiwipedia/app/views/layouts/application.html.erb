@@ -7,17 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<nav class="navbar navbar-default navbar-fixed-top" >
+		<div class="container">
+			<a class="navbar-brand" href="/">EncyclopediaWiki</a>
+				<ul class="nav navbar-nav navbar-right">
+				<% if user_signed_in? %>		
+					<li><a href="articles/new">New Article</a></li>
+				<% end %> 
+				</ul>
+		</div>
+	</nav>
+
        <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
-		<%= yield %>
+       <div class="container">
+       		<div class="row">
+       			<div class="col-md-8">
+					<%= yield %>
+       			</div>
+       				<div class="col-md-4">
+						<ul class="list-group">
+							<li class="list-group-item"><a href="/">All Articles</a></li>
+							<% Category.all.each do |category| %> 
+							<li class="list-group-item"><a href="/articles?category=<%= category.name %>"><%= category.name %></a></li>
+							<% end %> 
+						</ul>
+					</div>
+			</div>
+		</div>
 
-		<ul>
-			<li><a href="/">All Articles</a></li>
-			<% Category.all.each do |category| %> 
-			<li><a href="/articles?category=<%= category.name %>"><%= category.name %></a></li>
-			<% end %> 
 
-		</ul>
 
 </body>
 </html>
