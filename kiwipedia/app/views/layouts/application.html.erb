@@ -9,7 +9,15 @@
 <body>
        <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
-<%= yield %>
+		<%= yield %>
+
+		<ul>
+			<li><a href="/">All Articles</a></li>
+			<% Category.all.each do |category| %> 
+			<li><a href="/articles?category=<%= category.name %>"><%= category.name %></a></li>
+			<% end %> 
+
+		</ul>
 
 </body>
 </html>
