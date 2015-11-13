@@ -2,3 +2,5 @@
 <p><%= @article.content %></p>
 
 <a href="/articles">Back</a>
+<a href="/articles/<%= @article.id %>/edit">Edit</a>
+<a href="/articles/<%= @article.id %>" form method="delete" data-confirm="Are you sure you want to delete this?">Delete</a>
