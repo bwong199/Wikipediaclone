@@ -1,4 +1,8 @@
-<h1>This is the articles index page </h1>
+<% @articles.each do |article| %>
 
+<h2><%= article.title %></h2>
+<p>Published at <%= article.created_at.strftime('%b %d %Y') %></p>
+<p><%= truncate(article.content, length: 200) %></p>
+<% end %>
 
 <a href="/articles/new">New Article</a>
