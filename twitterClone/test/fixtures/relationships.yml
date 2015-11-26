@@ -1,0 +1,12 @@
+one:
+  follower: ben
+  followed: lana
+two:
+  follower: ben
+  followed: mallory
+three:
+  follower: lana
+  followed: ben
+four:
+  follower: archer
+  followed: ben
